@@ -3,8 +3,8 @@ package ru.avalon.java.j20.labs.tasks;
 import ru.avalon.java.j20.labs.Task;
 import ru.avalon.java.j20.labs.models.Country;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -35,19 +35,24 @@ public class Task6 implements Task {
          */
     }
 
-    /**
-     * Выполняет чтение коллекции объектов типа {@link Country}
-     * из указанного файла.
-     *
-     * <p>Выполняет чтение файла построчно. Преобразование
-     * из текста в объект выполняется с использованием
-     * метода {@code valueOf} класса {@link Country}.
-     *
-     * @param file файл
-     * @return коллекция объектов типа {@link Country}
-     * @throws IOException в случае ошибки ввода-вывода.
-     */
     private Collection<Country> read(File file) throws IOException {
-        throw new UnsupportedOperationException("Not implement yet!");
+
+        Reader reader = new FileReader(file);
+        BufferedReader bfReader = new BufferedReader(reader);
+        //Collection <String> coll = new ArrayList<String>();
+        Collection<Country> country = new ArrayList<Country>();
+        String i;
+
+
+        String [] str;
+        while ((i = bfReader.readLine()) != null)
+        {
+            str = i.split(":");
+            country.add(new Country(str[0], str[1]));
+            //coll.add(i);
+        }
+
+        return country;
+        //throw new UnsupportedOperationException("Not implement yet!");
     }
 }
