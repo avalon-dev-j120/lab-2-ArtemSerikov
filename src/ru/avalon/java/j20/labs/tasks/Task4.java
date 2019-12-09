@@ -2,6 +2,8 @@ package ru.avalon.java.j20.labs.tasks;
 
 import ru.avalon.java.j20.labs.Task;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -17,7 +19,7 @@ public class Task4 implements Task {
      */
     @Override
     public void run() throws IOException {
-        Properties properties = read("resources/database");
+        Properties properties = read("C:\\Users\\User\\Desktop\\lab-2-ArtemSerikov-master\\src\\resources\\database.properties");
 
         /*
          * TODO(Студент): Выполнить задание №4
@@ -36,6 +38,21 @@ public class Task4 implements Task {
      * @return новый экземпляр типа {@link Properties}
      */
     private Properties read(String path) {
-        throw new UnsupportedOperationException("Not implement yet!");
+        FileInputStream fileInputStream;
+        Properties prop = new Properties();
+        try {
+            fileInputStream = new FileInputStream(path);
+            prop.load(fileInputStream);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        finally {
+            return prop;
+        }
+
+        //throw new UnsupportedOperationException("Not implement yet!");
     }
 }
